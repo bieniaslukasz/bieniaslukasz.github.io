@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D3 Page Template</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="d3.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+
+  var dataset2 = [ 5, 10, 15, 20, 25 ];
+  console.log(dataset2);   //Log the data.
+
+  var dataset;
+  var paragrafy;
+  // var rowConverter = function(d) {
+  //     return {
+  //         parseFloat(d.Data)
+  //     };
+  // }
+
+  // d3.csv("food.csv", rowConverter, function(data) {
+  //     console.log(data);
+  // });
+
+
+  d3.csv("data.csv", function(error, data) {
+
+      if (error) {  //If error is not null, something went wrong.
+          console.log(error);  //Log the error.
+      } else {      //If no error, the file loaded correctly. Yay!
+          console.log(data);   //Log the data.
+
+          //Include other code to execute after successful file load here
+          dataset = data;
+          console.log(dataset);   //Log the data.
+
+
+          paragrafy = d3.select("body").selectAll("p")
+          .data(data)
+          .enter()
+          .append("p")
+          .text(function(d) {
+            return "Lubie placki " + d.Data;
+          });
+
+          //generateVis();
+          //hideLoadingMsg();
+      }
+
+  });
+
+
+  paragrafy.attr("font-family", "sans-serif")
+   .attr("font-size", "11px")
+   .attr("fill", "red");
+
+
+
+  // d3.select("body").append("p").text("New paragraph!");
+  // var rowConverter = function(d) {
+  //     return {
+  //         Food: d.Food,  //No conversion
+  //         Deliciousness: parseFloat(d.Deliciousness)
+  //     };
+  // }
+  //
+  // d3.csv("food.csv", rowConverter, function(data) {
+  //     console.log(data);
+  // });
+  </script>
+
+  <svg width="500" height="500">
+    <rect x="0" y="20" width="80" height="80" fill="purple" stroke = "grey" stroke-width = "2" opacity = "0.8"/>
+    <rect x="20" y="15" width="80" height="80" fill="blue" stroke = "grey" stroke-width = "2" opacity = "0.7"/>
+    <rect x="40" y="10" width="80" height="80" fill="green" stroke = "grey" stroke-width = "2" opacity = "0.6"/>
+    <rect x="60" y="5" width="80" height="80" fill="yellow" stroke = "grey" stroke-width = "2" opacity = "0.5"/>
+    <rect x="80" y="0" width="80" height="80" fill="red" stroke = "grey" stroke-width = "2" opacity = "0.4"/>
+  </svg>
+</body>
+</html>
